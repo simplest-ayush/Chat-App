@@ -35,13 +35,13 @@ const useListenMessages = () => {
         // console.log("useListenMessages effect running. Socket : ", socket);
 
         const handler = (newMessage) => {
-            // console.log("Received newMessage:", newMessage);
+            console.log("Received newMessage:", newMessage);
             const myId = String(authUser?.data?.user?._id);
             const otherId = String(selectedConversation?._id);
             const senderId = String(newMessage.senderId);
             const receiverId = String(newMessage.receiverId);
 
-            // console.log({ myId, otherId, senderId, receiverId });
+            console.log({ myId, otherId, senderId, receiverId });
 
             if (
                 (senderId === myId && receiverId === otherId) ||
@@ -49,9 +49,13 @@ const useListenMessages = () => {
             ) {
                 // setMessages(prev => [...prev, newMessage]);
                 setMessages(prev => {
-                    const currentMessages = Array.isArray(prev) ? prev : prev?.data || [];
+                    const currentMessages = Array.isArray(prev) ? prev : prev || [];
                     return [...currentMessages, newMessage];
                 });
+                // setMessages(prev => ({
+                //     ...prev,
+                //     data: [...(prev?.data || []), newMessage]
+                // }));
             }
         };
         socket.on("newMessage", handler);
