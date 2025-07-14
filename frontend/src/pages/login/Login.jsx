@@ -24,7 +24,7 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <div>
             <label className="label p-2 text-gray-600">
-              <span className="text-base label-text">Username</span>
+              <span className="text-base label-text text-white">Username</span>
             </label>
             <input
               type="text"
@@ -37,7 +37,7 @@ function Login() {
 
           <div>
             <label className="label p-1.5 text-gray-600">
-              <span className="text-basee label-text">Password</span>
+              <span className="text-base label-text text-white">Password</span>
             </label>
             <input
               type="password"
