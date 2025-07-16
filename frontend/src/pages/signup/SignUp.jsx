@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import GenderCheckbox from "./GenderCheckbox";
 import { Link } from "react-router-dom";
 import useSignup from "../../hooks/useSignup.js";
+import { useNavigate } from "react-router-dom";
 function SignUp() {
   const [inputs, setInputs] = useState({
     fullName: "",
@@ -13,6 +14,7 @@ function SignUp() {
   });
 
   const { loading, signup } = useSignup();
+  const navigate = useNavigate();
 
   const handleCheckboxChange = (gender) => {
     setInputs({ ...inputs, gender });
@@ -22,6 +24,7 @@ function SignUp() {
     e.preventDefault();
     // console.log(inputs);
     await signup(inputs);
+    // navigate("/login");
     setInputs({
       fullName: "",
       username: "",

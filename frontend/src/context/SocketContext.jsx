@@ -18,10 +18,11 @@ export const SocketContextProvider = ({ children }) => {
   // console.log("User id in Socket Context is : ", authUser.data.user._id);
 
   useEffect(() => {
-    console.log("authUser in SocketContext: ", authUser);
+    // console.log("authUser in SocketContext: ", authUser);
 
     if (authUser) {
       const socket = io("https://chat-app-uw18.onrender.com", {
+      // const socket = io("http://localhost:5000", {
         query: {
           userId: authUser?.data?.user?._id,
         },

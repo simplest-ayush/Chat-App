@@ -35,7 +35,7 @@ const useGetConversations = () => {
                 if (data.error) {
                     throw new Error(data.error)
                 }
-                console.log("Inside useGetConversation hook : ", data);
+                // console.log("Inside useGetConversation hook : ", data);
                 // const otherUsers = data.data.filter(user => user._id !== authUser?._id);
                 setConversations(data)
                 // setConversations(otherUsers)
