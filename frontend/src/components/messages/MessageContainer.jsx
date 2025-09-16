@@ -64,7 +64,7 @@ const NoChatSelected = () => {
     <div className="flex items-center justify-center w-full h-full">
       <div className="px-2 text-center text-md sm:text-md md:text-md text-gray-200 font-semibold flex flex-col items-center gap-2">
         <p className="truncate">
-          Welcome 👋 {authUser?.data?.user?.fullName} ❄
+          Welcome 👋 {authUser?.data?.user?.fullName || authUser?.fullName} ❄
         </p>
         <p className="text-xs sm:text-base">Select a chat to start messaging</p>
         <TiMessages className="text-3xl md:text-6xl text-center" />

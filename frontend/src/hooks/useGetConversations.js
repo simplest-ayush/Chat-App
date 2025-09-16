@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
 import toast from 'react-hot-toast'
+import { useAuthContext } from '../context/AuthContext';
 
 const useGetConversations = () => {
     const [loading, setLoading] = useState(false);
     const [conversations, setConversations] = useState({});
     const hasShownError = useRef(false);
     const navigate = useNavigate();
+    const { authUser } = useAuthContext();
 
     useEffect(() => {
         const getConversations = async () => {
@@ -37,7 +39,17 @@ const useGetConversations = () => {
                 }
                 // console.log("Inside useGetConversation hook : ", data);
                 // const otherUsers = data.data.filter(user => user._id !== authUser?._id);
-                setConversations(data)
+                const currentUserId = authUser?._id;
+                const filteredUsers = {
+                    ...data,
+                    data: data.data.filter(user => {
+                        const userId = user._id;
+                        return userId !== currentUserId;
+                    }) || []
+                }
+                // console.log(filteredUsers);
+
+                setConversations(filteredUsers)
                 // setConversations(otherUsers)
             } catch (error) {
                 if (!hasShownError.current) {
