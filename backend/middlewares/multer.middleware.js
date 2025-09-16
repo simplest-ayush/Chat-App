@@ -1,17 +1,38 @@
+// import multer from "multer";
+// import path from "path"
+// // import x from "../public/images"
+
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         // cb(null, '../public/images')
+//         cb(null, path.join(process.cwd(), 'public', 'images'));
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, Date.now() + '-' + file.originalname.replace(/\s+/g, '_'));
+//     }
+// })
+
+// export const upload = multer({
+//     storage: storage
+// })
+
 import multer from "multer";
-import path from "path"
-// import x from "../public/images"
+import path from "path";
+
+const isRender = process.env.RENDER === "true";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        // cb(null, '../public/images')
-        cb(null, path.join(process.cwd(), 'public', 'images'));
+        const dest = isRender
+            ? "/tmp"
+            : path.join(process.cwd(), "public", "images");
+        cb(null, dest);
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + '-' + file.originalname.replace(/\s+/g, '_'));
     }
-})
+});
 
 export const upload = multer({
     storage: storage
-})
+});
